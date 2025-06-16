@@ -10,6 +10,7 @@ export function up(knex: Knex) {
 
     table.string("givenName").notNullable();
     table.string("familyName").notNullable();
+    table.string("displayName").notNullable().defaultTo("");
   });
 }
 

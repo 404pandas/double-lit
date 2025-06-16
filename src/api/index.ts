@@ -3,6 +3,7 @@
  */
 
 import { gql } from "graphql-tag";
+import db from "../db";
 
 // ‼️ Issue located! Issue #2 + #4
 
@@ -24,8 +25,9 @@ export const resolvers = {
       // 🐞 Bug fix needed!
       // We're not returning what's in DB 😱
       // 🕸️ Bug caught! Issue #1
+      // Solution- bring in the db client and use the listAuthors method!
       // ‼️ Issue located! Issue #8 (add Pagination)
-      return [];
+      return db.listAuthors(); // ✅ Correct usage
     },
     // ‼️ Issue located! Issue #5
   },

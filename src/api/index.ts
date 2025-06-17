@@ -18,6 +18,10 @@ export const typeDefs = gql`
     countryName: String!
     pronouns: String!
   }
+  type AuthorPage {
+    authors: [Author!]!
+    totalCount: Int!
+  }
 
   input CreateAuthorInput {
     givenName: String!
@@ -35,7 +39,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    authors: [Author!]!
+    authors(limit: Int = 10, offset: Int = 0): AuthorPage!
     author(id: ID!): Author
   }
 
@@ -47,11 +51,17 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    authors: () => {
+    authors: async (_: any, { limit = 10, offset = 0 }: { limit: number; offset: number }) => {
       // 🕸️ Bug caught! Issue #1
       // Solution #1- bring in the db client and use the listAuthors method!
       // ‼️ Issue located! Issue #8 (add Pagination)
-      return db.listAuthors(); // ✅ Correct usage
+      //  Solution #8- add pagination to the listAuthors method
+      // Fetch authors with pagination
+      // Note: limit and offset are optional, defaulting to 10 and 0 respectively
+      const authors = await db.listAuthors(limit, offset);
+      // Fetch total count of authors for pagination
+      const totalCount = await db.countAuthors();
+      return { authors, totalCount };
     },
     // ‼️ Issue located! Issue #5
     //  Solution #5- add a resolver to fetch a single author by ID.

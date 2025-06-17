@@ -17,8 +17,10 @@ export class Db {
     this.knex = initKnex(config.development);
   }
 
-  public listAuthors() {
-    return this.knex.table<Author>('authors').select('*').limit(10);
+  // ‼️ Issue located! Issue #8
+  //  Solution #8- add pagination to the listAuthors method
+  public listAuthors(limit = 10, offset = 0) {
+    return this.knex.table<Author>('authors').select('*').limit(limit).offset(offset);
   }
 
   // ‼️ Issue located! Issue #5
@@ -37,6 +39,16 @@ export class Db {
   //  Solution #7- add a method to update an existing author
   public updateAuthor(id: number, author: Partial<Omit<Author, 'id'>>) {
     return this.knex.table<Author>('authors').where('id', id).update(author).returning('*');
+  }
+
+  // ‼️ Issue located! Issue #8
+  //  Solution #8- add a method to count the total number of authors
+  public countAuthors() {
+    return this.knex
+      .table<Author>('authors')
+      .count<{ count: number }[]>('* as count')
+      .first()
+      .then((res) => Number(res?.count ?? 0));
   }
 }
 

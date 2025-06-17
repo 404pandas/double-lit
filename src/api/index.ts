@@ -9,8 +9,6 @@ import db from '../db';
 import Countries from '../lib/Countries';
 const countries = new Countries();
 
-// ‼️ Issue located! Issue #2 + #4
-// Solution #2: Add displayName field to Author type and create a resolver for it.
 export const typeDefs = gql`
   type Author {
     id: ID!
@@ -35,9 +33,12 @@ export const resolvers = {
       // ‼️ Issue located! Issue #8 (add Pagination)
       return db.listAuthors(); // ✅ Correct usage
     },
+    // ‼️ Issue located! Issue #5
+    //  Solution #5- add a resolver to fetch a single author by ID.
     author: async (_: any, { id }: { id: number }) => {
       // Fetch a single author by ID
       const author = await db.getAuthorById(id);
+      // If author is not found, throw an error
       if (!author) {
         throw new Error(`Author with ID ${id} not found`);
       }

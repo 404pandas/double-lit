@@ -21,6 +21,8 @@ export class Db {
     return this.knex.table<Author>('authors').select('*').limit(10);
   }
 
+  // ‼️ Issue located! Issue #5
+  //  Solution #5- use knex.table with where for id and add a first() to get a single record
   public getAuthorById(id: number) {
     return this.knex.table<Author>('authors').where('id', id).first();
   }

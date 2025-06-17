@@ -84,3 +84,4 @@ npm start
 2. 🧰 How familiar were you with the libraries/tools used?
 3. 🚀 What would you add/change with more time?
 4. 💬 Any feedback for the team?
+   - When developing the Country Code, the seeds included country codes for all authors. I would have loved to see a seed with no country code, so I can test my code that returns "No Country Code" if an author doesn't have an author.countryCode

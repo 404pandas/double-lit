@@ -93,6 +93,8 @@ npm start
    - Prettier (10 years of experience)
 5. 🚀 What would you add/change with more time?
    -  I’d implement stronger input validation both at the GraphQL schema level and at the database layer to prevent invalid or inconsistent data. (Ask me how much I love throwing ENUM into projects!)
+   -  Use tools like useMemo, useCallback, or server-side caching (Redis) to avoid redundant computation or repeated DB hits, especially for expensive lookups like country names or paginated queries.
+   -  Add limits to how large the limit parameter can be in the authors(limit, offset) query to prevent overloading the server (e.g. cap it at 100). Consider default sorting and cursor-based pagination for scalability.
    -  If I had all the time in the world, I would love to add a front end to this project. While I'm a bouncer, front end is where my passion truly lies!
 7. 💬 Any feedback for the team?
    - When developing the Country Code, the seeds included country codes for all authors. I would have loved to see a seed with no country code, so I can test my code that returns "No Country Code" if an author doesn't have an author.countryCode

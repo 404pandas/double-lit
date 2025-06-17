@@ -1,4 +1,5 @@
-📚 Double Wiki — Literature Author Wiki Challenge
+# 📚 Double Wiki — Literature Author Wiki Challenge
+
 Double Wiki is a full-stack application designed to manage and display a growing database of literature authors from around the world. Built using modern web technologies like TypeScript, GraphQL, Apollo Server, Knex, and SQLite, the project showcases best practices for building scalable, maintainable APIs in a collaborative engineering environment.
 
 This challenge simulates real-world product development by asking engineers to:
@@ -81,7 +82,17 @@ npm start
 ## 🧠 Final Questions
 
 1. ⏱️ How long did you spend on this challenge?
-2. 🧰 How familiar were you with the libraries/tools used?
-3. 🚀 What would you add/change with more time?
-4. 💬 Any feedback for the team?
+   - This coding challenge took me approximately 3 hours! It was a fun little challenge! Thank you for the opportunity!
+3. 🧰 How familiar were you with the libraries/tools used?
+   - Apollo Server (10 years of experience)
+   - Axios (10 years of experience)
+   - GraphQL (10 years of experience)
+   - Knex (New to me! I had a very great relationship with it!)
+   - SQLite3 (SQL is not new to me, but this package was new to me. I had to do a lot more reading on this package than Knex, which was a lot more intuitive)
+   - TypeScript (10 years of experience)
+   - Prettier (10 years of experience)
+5. 🚀 What would you add/change with more time?
+   -  I’d implement stronger input validation both at the GraphQL schema level and at the database layer to prevent invalid or inconsistent data. (Ask me how much I love throwing ENUM into projects!)
+   -  If I had all the time in the world, I would love to add a front end to this project. While I'm a bouncer, front end is where my passion truly lies!
+7. 💬 Any feedback for the team?
    - When developing the Country Code, the seeds included country codes for all authors. I would have loved to see a seed with no country code, so I can test my code that returns "No Country Code" if an author doesn't have an author.countryCode

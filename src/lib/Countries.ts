@@ -37,4 +37,23 @@ export default class Countries {
 
   // 🗺 Add your method(s) here
   // ‼️ Issue located! Issue #3
+  // Solution #3: Add a method to get the country name by its code.
+  public async getNameByCode(code: string): Promise<string | null> {
+  try {
+    // Fetch country data by code
+    const { data } = await this.restApi.get<any[]>(`/alpha/${code}`);
+
+    // Check if data is an array and has at least one element
+  
+    if (Array.isArray(data) && data.length > 0) { // If so, return the common name of the first country in the array
+    // If the data is not an array or is empty, return null
+      return data[0].name?.common || null;
+    }
+
+    return null;
+  } catch (error) {
+    console.error(`Failed to fetch country for code ${code}:`, error);
+    return null;
+  }
+}
 }

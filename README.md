@@ -1,4 +1,4 @@
-📚 Double Wiki — Literature Author Wiki Challenge
+# 📚 Double Wiki — Literature Author Wiki Challenge
 
 Double Wiki is a full-stack application designed to manage and display a growing database of literature authors from around the world. Built using modern web technologies like TypeScript, GraphQL, Apollo Server, Knex, and SQLite, the project showcases best practices for building scalable, maintainable APIs in a collaborative engineering environment.
 

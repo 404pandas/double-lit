@@ -26,6 +26,18 @@ export class Db {
   public getAuthorById(id: number) {
     return this.knex.table<Author>('authors').where('id', id).first();
   }
+
+  // ‼️ Issue located! Issue #7
+  //  Solution #7- add a method to insert a new author
+  public addAuthor(author: Omit<Author, 'id'>) {
+    return this.knex.table<Author>('authors').insert(author).returning('*');
+  }
+
+  // ‼️ Issue located! Issue #7
+  //  Solution #7- add a method to update an existing author
+  public updateAuthor(id: number, author: Partial<Omit<Author, 'id'>>) {
+    return this.knex.table<Author>('authors').where('id', id).update(author).returning('*');
+  }
 }
 
 export default new Db();

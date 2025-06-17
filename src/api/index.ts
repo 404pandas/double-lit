@@ -3,7 +3,7 @@
  */
 
 import { gql } from 'graphql-tag';
-import db from '../db';
+import db, { Author } from '../db';
 
 // ** COUNTRIES ** 🌍
 import Countries from '../lib/Countries';
@@ -19,9 +19,29 @@ export const typeDefs = gql`
     pronouns: String!
   }
 
+  input CreateAuthorInput {
+    givenName: String!
+    familyName: String!
+    countryCode: String!
+    pronouns: String
+  }
+
+  input UpdateAuthorInput {
+    id: ID
+    givenName: String
+    familyName: String
+    countryCode: String
+    pronouns: String
+  }
+
   type Query {
     authors: [Author!]!
     author(id: ID!): Author
+  }
+
+  type Mutation {
+    addAuthor(input: CreateAuthorInput): Author!
+    updateAuthor(id: ID!, input: UpdateAuthorInput): Author!
   }
 `;
 
@@ -68,7 +88,20 @@ export const resolvers = {
       return (await countries.getNameByCode(author.countryCode)) ?? 'No Country Found';
     },
   },
-  // ‼️ Issue located! Issue #5
-
   // ‼️ Issue located! Issue #7
+  // // Solution #7: Add a resolver for the Mutation type to handle adding and updating authors.
+  Mutation: {
+    addAuthor: async (_: any, { input }: { input: Omit<Author, 'id'> }) => {
+      const [author] = await db.addAuthor(input); // Destructure result from knex .returning()
+      return author;
+    },
+
+    updateAuthor: async (
+      _: any,
+      { id, input }: { id: number; input: Partial<Omit<Author, 'id'>> }
+    ) => {
+      const [updatedAuthor] = await db.updateAuthor(id, input);
+      return updatedAuthor;
+    },
+  },
 };
